@@ -1,3 +1,25 @@
+#
+# PersistentVolume
+#
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-persistent-volume
+  labels:
+    type: local
+spec:
+  storageClassName: hostpath
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /tmp
+  persistentVolumeReclaimPolicy: Retain
+---
+#
+# PersistentVolumeClaim
+#
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -5,7 +27,7 @@ metadata:
 spec:
   storageClassName: hostpath
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 3Gi
